@@ -1,0 +1,27 @@
+.venv/
+media/
+__pycache__/
+*.pyc
+client_secret.json
+yt_token.json
+.env
+models/
+
+# ---- secrets & personal state: NEVER commit ----
+client_secret*.json
+yt_token*.json
+yt_quota.json
+yt_channel_info.json
+channels.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+cookies*.txt
+.claude/
+queue*.json
+
+# local backups (old history contains YouTube tokens) - never commit
+*.bundle
+backup/

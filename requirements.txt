@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+yt-dlp[default]
+numpy
+opencv-python-headless
+soundfile
+imageio-ffmpeg
+requests
+edge-tts
+pillow
+google-api-python-client
+google-auth-oauthlib
+tzdata
+faster-whisper

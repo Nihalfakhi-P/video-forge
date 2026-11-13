@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VideoForge — AI Video Creation &amp; Repurposing</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">▶</span> VideoForge</div>
+  <div id="statusbar">
+    <span class="pill" id="llm-pill">LLM: checking…</span>
+    <span class="pill" id="yt-pill">YouTube: …</span>
+    <span class="pill" id="disk-pill">Disk: …</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="repurpose">✂️ Repurpose Video</button>
+  <button class="tab" data-tab="library">🎬 Library</button>
+</nav>
+
+<main>
+  <!-- ================= Workflow A ================= -->
+  <section id="tab-repurpose" class="panel visible">
+    <h2>Repurpose a long video into viral Shorts</h2>
+    <p class="hint">Tier 1: audio-energy (RMS) + optical-flow motion scan &nbsp;→&nbsp;
+      Tier 2: local LLM verifies context, tunes timestamps &amp; writes metadata &nbsp;→&nbsp;
+      FFmpeg cuts vertical 9:16 clips.</p>
+    <div class="card">
+      <label>YouTube / Google Drive / any video URL</label>
+      <div class="row">
+        <input id="rep-url" type="text" placeholder="https://www.youtube.com/watch?v=…">
+        <button class="primary" id="rep-url-btn">Analyze &amp; Clip</button>
+      </div>
+      <div class="or">— or —</div>
+      <label class="filedrop" id="rep-drop">
+        <input type="file" id="rep-file" accept="video/*" hidden>
+        <span>Drop a video file here or click to browse</span>
+      </label>
+      <div class="row opts" id="rep-opts">
+        <label class="check" title="An AI commentator speaks a short hype line over each clip's intro (game audio ducks while it plays)">
+          <input type="checkbox" id="rep-vo"> 🎙️ Reaction voiceover
+        </label>
+        <label class="check" title="A full English narration over the whole clip — ideal for Bilibili / foreign videos with no subtitles (original audio stays as quiet ambience)">
+          <input type="checkbox" id="rep-commentary"> 🗣️ English commentary (full)
+        </label>
+        <label class="check" title="Frames matching the video's thumbnail (embedded title cards) are excluded from clips">
+          <input type="checkbox" id="rep-nothumb" checked> 🚫 Skip thumbnail frames
+        </label>
+        <label class="check">Framing
+          <select id="rep-frame">
+            <option value="fit" selected>Fit — blurred bars</option>
+            <option value="fill">Full portrait — crop to fill</option>
+          </select>
+        </label>
+      </div>
+      <p class="hint">Clips are cut in playback order and labeled Part 1, 2, 3… so the story carries across your Shorts.</p>
+    </div>
+    <div class="jobbox" id="rep-job" hidden></div>
+  </section>
+
+  <!-- ================= Library ================= -->
+  <section id="tab-library" class="panel">
+    <h2>Your clips &amp; renders</h2>
+    <div id="storage-bar" class="storage-bar">
+      <span id="storage-text" class="storage-text">Checking storage…</span>
+      <button id="storage-clean-uploaded" title="Delete local copies of clips/renders already uploaded to YouTube (their upload record is kept)">🧹 Free space from uploaded</button>
+      <button id="storage-clear-sources" title="Delete cached source downloads (re-downloaded automatically when needed)">🗑 Clear source cache</button>
+    </div>
+    <div id="lib-toolbar" class="lib-toolbar" hidden>
+      <span id="lib-count"></span>
+      <button id="lib-upload">⏫ Upload selected to YouTube</button>
+      <button id="lib-delete" class="danger">🗑 Delete selected</button>
+      <button id="lib-clear">✕ Clear selection</button>
+    </div>
+    <div id="library"></div>
+  </section>
+</main>
+
+<dialog id="yt-dialog">
+  <form method="dialog" id="yt-form">
+    <h3>Upload to YouTube</h3>
+    <div id="yt-quota" class="quota-line"></div>
+    <label>Channel</label>
+    <div id="yt-channels" class="channel-picker"></div>
+    <label>Title</label><input id="yt-title" maxlength="100" required>
+    <label>Description</label><textarea id="yt-desc" rows="3"></textarea>
+    <label>Hashtags (comma separated)</label><input id="yt-tags">
+    <label>Privacy</label>
+    <select id="yt-privacy">
+      <option value="public" selected>Public (live immediately — you can delete anytime)</option>
+      <option value="unlisted">Unlisted</option>
+      <option value="private">Private (review first)</option>
+    </select>
+    <div class="row right">
+      <button value="cancel">Cancel</button>
+      <button class="primary" value="ok" id="yt-go">Upload</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="batch-dialog">
+  <form method="dialog" id="batch-form">
+    <h3>Upload <span id="batch-n"></span> videos to YouTube</h3>
+    <div id="batch-quota" class="quota-line"></div>
+    <p class="hint" style="margin:6px 0 0">Each video uses its own saved title, description and hashtags.</p>
+    <label>Channel (for all)</label>
+    <div id="batch-channels" class="channel-picker"></div>
+    <label>Privacy (for all)</label>
+    <select id="batch-privacy">
+      <option value="public" selected>Public (live immediately — you can delete anytime)</option>
+      <option value="unlisted">Unlisted</option>
+      <option value="private">Private (review first)</option>
+    </select>
+    <div class="row right">
+      <button value="cancel">Cancel</button>
+      <button class="primary" value="ok" id="batch-go">Upload all</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toasts"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

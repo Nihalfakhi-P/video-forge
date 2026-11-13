@@ -1,0 +1,4 @@
+{
+  "kids":   {"label": "Kids — animated videos", "made_for_kids": true,  "shorts_only": true},
+  "gaming": {"label": "Gaming & Entertainment", "made_for_kids": false, "shorts_only": true}
+}
