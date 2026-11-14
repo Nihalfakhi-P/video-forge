@@ -49,6 +49,9 @@ CRF = 19                        # x264 quality (lower = better); 19 ≈ visually
                                 # CRF sets quality; preset only trades encode speed vs
                                 # file size at that quality. "fast" keeps this laptop snappy.
 X264_PRESET = "fast"
+# Burn the clip title ("Part 1: ...") into the top of the video. Off by default:
+# the title still goes into the YouTube title/description, just not on screen.
+BURN_TITLES = os.environ.get("BURN_TITLES", "0").lower() in ("1", "true", "yes")
 
 # ---- Download proxy (optional) ----
 # Routes ONLY video ingest (yt-dlp) through a proxy — YouTube uploads, TTS and

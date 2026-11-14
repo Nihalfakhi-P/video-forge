@@ -1,7 +1,8 @@
 # VideoForge — turn long videos into YouTube Shorts
 
 Paste a YouTube link (or pick a video file from your PC), and VideoForge finds the best
-moments, cuts them into vertical 9:16 Shorts (1080x1920) with a title on top, and can
+moments, cuts them into clean vertical 9:16 Shorts (1080x1920), writes a title and
+description for each, and can
 upload them straight to your YouTube channel. Runs on your own PC, **free**.
 
 ![VideoForge app](docs/screenshot.jpg)
@@ -36,8 +37,8 @@ upload them straight to your YouTube channel. Runs on your own PC, **free**.
    - **🎙️ Reaction voiceover:** an AI voice says a short hype line at the start of each clip.
    - **🗣️ English commentary:** a full English narration over the clip. Use it for videos in another language.
 4. Wait while the progress bar runs. Expect about **2–3 minutes per Short**, and a 10-minute video
-   usually gives 3–6 Shorts. The AI picks the best moments, cuts them vertical (1080x1920), adds a
-   title at the top, and labels them Part 1, 2, 3 in order.
+   usually gives 3–6 Shorts. The AI picks the best moments, cuts them vertical (1080x1920), and
+   writes a title for each (used for YouTube, not drawn on the video), labelled Part 1, 2, 3 in order.
 5. Open the **🎬 Library** tab to watch, download or delete your Shorts. The files are also saved in
    the `media\clips` folder inside VideoForge.
 

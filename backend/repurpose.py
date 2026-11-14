@@ -110,7 +110,7 @@ def run(job, source: str | dict, options: dict | None = None):
         stamp = int(time.time())
         out = config.CLIPS_DIR / f"clip_{stamp}_{k}.mp4"
         cut_vertical_clip(src, s, e, out, blur_pad=(opts["frame"] == "fit"),
-                          title=part_title)
+                          title=part_title if config.BURN_TITLES else "")
 
         vo_line = ""
         commentary = ""
